@@ -303,3 +303,85 @@ var myApp = angular.module("myApp", [])
 This syntax is also valid and is often more succinct as you are defining the module rather than chaining that together with the definition of the controller.
 
 You will have probably noticed that the controller we have defined here doesn't do anything yet, but it is enough for us to use to get started.
+
+# Curso   Module 1: Getting Started with Angular   Resource Content: Getting Started with Angular   Bootstrapping Your Angular Modules
+
+# Bootstrapping Your Angular Modules
+
+Bootstrapping your module starts Angular and initializes the module, binding it to a section of the HTML that you wish to transform into a dynamic view. "Binding" tells Angular that this piece of HTML will be controlled by Angular, which will allow it to transform the HTML as the data changes, thereby creating a "Dynamic View" instead of the "Static View" of plain HTML.
+
+Your Angular app can affect as much or as little HTML as you prefer. For example, if you are defining a Single Page App, you will want to bootstrap your module on the <html> element, so that Angular can control the entirety of the page.
+
+```[html]
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>My Page</title>
+</head>
+
+<body ng-controller="myController">
+</body>
+
+</html>
+```
+If you want Angular to only control some of your page, for example, if you are implementing Angular in a website that was built mostly out of jQuery, then you would do something like this:
+```[html]
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Page</title>
+</head>
+
+
+<body>
+
+<div>
+
+There's some content here not controlled by Angular.
+</div>
+
+<div ng-app='myApp'>
+This is the content that is controlled by the Angular module 'myApp'.
+<div ng-controller='myController'>
+This is the content controlled by the controller myController.
+</div>
+
+</div>
+
+</body>
+</html>
+```
+You could also use multiple Angular modules on the same page, enabling you to create two separate applications to control different pieces of the page, like so:
+```[html]
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Page</title>
+</head>
+
+
+<body>
+
+<div ng-app='myOtherApp'>
+This is the content controlled by the Angular module 'myOtherApp'.
+</div>
+
+<div ng-app='myApp'>
+This is the content that is controlled by the Angular module 'myApp'.
+<div ng-controller='myController'>
+This is the content controlled by the controller myController.
+</div>
+
+</div>
+
+</body>
+</html>
+```
+Note: You'll notice the Angular bootstrap property begins with ng-. This is a standard preface for Angular object references and probably has something to do with the way it sounds (or, as some suspect, the fact that it makes up the second two letters of the word Angular). If you use Visual Studio or Visual Studio Code, you can use Intellisense to find Angular objects by typing ng- and letting Visual Studio provide you with options for what Angular objects are available.
+
+For more information , you can see: 
+Visual Studio: https://aka.ms/edx-dev220x-vs01 
+Download Visual Studio Code: https://aka.ms/edx-dev220x-vscode
