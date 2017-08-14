@@ -385,3 +385,205 @@ Note: You'll notice the Angular bootstrap property begins with ng-. This is a st
 For more information , you can see: 
 Visual Studio: https://aka.ms/edx-dev220x-vs01 
 Download Visual Studio Code: https://aka.ms/edx-dev220x-vscode
+
+# Curso   Module 1: Getting Started with Angular   Resource Content: Getting Started with Angular   Introduction to Dependency Injection
+
+# Introduction to Dependency Injection
+ Bookmark this page
+Introduction to Dependency Injection
+
+Dependency Injection (DI) is a software design pattern that manages how components in a system obtain their dependencies. In Angular, Dependency Injection is responsible for:
+
+Creating components
+Maintaining a component's state
+Providing components to other components, as required
+In Angular, DI allows us to share variables and functions between self-contained modules without having to reuse code, and maintains the state of each component.
+
+DI employs the injector, the service object(s) to be used, the client object that is depending on the services it uses, and the interfaces.
+
+Note: The Angular injector is used for retrieving services as well as creating the necessary objects for us. See: Angular Injector.
+
+The injector introduces the services to the client. Often, it also constructs the client. An injector may connect together a very complex object graph by treating an object like a client, and later, as a service for another client. The injector may actually be many objects working together, but may not be the client.
+
+Note: Services are discussed in our training course Advanced Framework Fundamentals with Angular. You can read more information on services in the documentation. Read More.
+
+When Angular compiles the HTML, it processes the ng-controller directive, which, in turn, asks the injector to create an instance of the controller and its dependencies. The application code simply declares the dependencies it needs without having to deal with the injector. Angular invokes certain functions, such as service factories and controllers, via the injector. You annotate these functions so that the injector knows what services to inject into the function.
+
+These functions are injectable with dependencies, just like the factory functions. The factory methods are registered with the modules. Components such as services, directives, filters, and animations are defined by an injectable factory method or constructor function. These components can be injected with service and value components as dependencies.
+
+DI allows a client the flexibility of being configurable. Only the client's behavior is fixed. The client may act on anything that supports the intrinsic interface the client expects. The client only needs to know about the intrinsic interfaces of the services since these define how the client may use the services. This separates the responsibilities of use and construction. The interfaces are the dependency types that the client expects.
+
+You use DI when defining components or when specifying functions to run at configuration and run time for a module by calling the config and run methods. The run method accepts a function, which can be injected with service, value, and constant components as dependencies. Note that you cannot inject providers into run blocks. The config method accepts a function, which can be injected with provider and constant components as dependencies. Note that you cannot inject service or value components into configuration.
+
+# Curso   Module 1: Getting Started with Angular   Resource Content: Getting Started with Angular   Using Dependency Injection
+
+# Using Dependency Injection
+ Bookmark this page
+Using Dependency Injection
+
+One of the most commonly used dependencies in Angular is $scope. Controllers need access to the $scope object in order to bind values to the view (this will be explained further in the Controllers section of the course). In order to have the $scope available, all we need is the following code in place:
+
+myApp.controller("myController", [
+    "$scope",
+    function($scope) {
+        // do stuff here      
+    }
+]);
+The controller initialization is similar to the one we've already seen, with a few additions:
+
+On the second line, we have "$scope". This line specifies that we are adding a reference to the $scope object.
+On the next line after that, we have the $scope object as a parameter. This defines $scope as a variable name in our controller.
+
+# Curso   Module 1: Getting Started with Angular   Module Labs: Overview and Required Configuration   Labs Overview
+
+# Labs Overview
+ Añadido a marcadores
+Labs Overview
+
+This module of the course includes a series of three tutorial style labs and one self-assessment lab. Some lab configuration is required.
+
+The tutorial labs are designed to help you set up Angular and start using Angular modules and dependency injection. These labs will lead you step-by-step through the process of bootstrapping Angular, creating modules, and implementing dependency injection.
+
+The final lab in this module is a self-assessment lab. In this lab, you will apply what you've learned during the tutorial labs to create a new HTML page and separate JavaScript files for the app and controller. The self-assessment lab gives you the opportunity to reinforce what you learned without providing the prescriptive step-by-step instructions that are provided in the tutorial labs.
+
+Tutorial Labs 
+
+Bootstrapping Angular
+
+There are multiple ways to instantiate Angular so that it works with your HTML to produce a dynamic view. The method that you choose will depend on whether you are building out a whole Single Page App (SPA), or just a component for an existing website. In this lab you will set up your HTML for Angular, declare your app, and bootstrap Angular.
+
+Declaring Modules
+
+In Angular, the word module refers to either an entire Angular application or independent components within that application, such as controllers, services, filters, and directives. In this lab, you will declare a Controller and bind the Controller to your HTML.
+
+Implementing Dependency Injection
+
+Dependency Injection is one of the best features in Angular. In this lab, you will learn how to declare constants and inject dependencies into your controllers. Services, Factories, and Resources can also be injected, and in labs that come up in later modules you will learn about them as well.
+
+# Curso   Module 1: Getting Started with Angular   Module Labs: Overview and Required Configuration   Configuration: To Install Visual Studio Code
+
+# Configuration: To Install Visual Studio Code
+ Bookmark this page
+To Install Visual Studio Code
+
+In order to develop your Angular, let's set up Visual Studio Code.
+
+Visual Studio Code is lightweight and is compatible with most available hardware and platform versions.
+
+Mac OS X
+
+Download Visual Studio Code for Mac OS X.
+Double-click on the downloaded archive to expand the contents.
+Drag Visual Studio Code.app to the Applications folder, making it available in the Launchpad.
+Add Visual Studio Code to your Dock by right-clicking on the icon, and choosing Options, Keep in Dock.
+Linux
+
+Download Visual Studio Code for your distribution, .deb for Debian-based distributions such as Ubuntu or .rpm for Red Hat-based distributions, such as Fedora or CentOS.
+Install the package through a graphical user interface package manager by double-clicking on the package file, or through the command line:
+
+bash # For .deb sudo dpkg -i .deb
+
+# For .rpm (Fedora 21 and below) sudo yum install .rpm
+
+# For .rpm (Fedora 22 and above) sudo dnf install .rpm
+
+Visual Studio Code should now be available to run through the launcher or the command line by running code.
+Tip: Run code in any folder to start editing files in that folder.
+
+Windows
+
+Download Visual Studio Code for Windows.
+To launch the setup process, double-click VSCodeSetup.exe.
+
+By default, Visual Studio Code is installed in the "C:\Program Files (x86)\Microsoft VS Code" folder location (for a 64-bit machine). The setup process should only take about a minute.
+
+Note: .NET Framework 4.5 is required for Visual Studio Code. If you are using Windows 7, please ensure .NET Framework 4.5 is installed.
+
+For more detailed instructions and tips, visit the full Microsoft Visual Studio Code Installation Instruction guide here.
+
+# Curso   Module 1: Getting Started with Angular   Module Labs: Overview and Required Configuration   Configuration: To Set Up the Lab Environment
+
+# Configuration: To Set Up the Lab Environment
+ Bookmark this page
+Configuration: To Set Up the Lab Environment
+
+You will be using Visual Studio Code to complete the labs in this module. You are welcome to use a different editor to modify your code files, but the lab instructions in this course will describe the steps that you need to perform using Visual Studio Code unless otherwise noted.
+
+There are just a couple of steps required to set up the lab environment for this module.
+
+Create a local folder on your development computer that you can use for your code project. Name the folder "Mod1Lab".
+
+Note: You can use File Explorer or another tool of your choice to create the project folder.
+
+Save the following code file to the project folder that you created above.
+
+Note: You will need to rename the file to match the file name shown below.
+
+helloworld.html
+Tip: To open a Save As file dialog, right-click the links above, and then click Save target as or Save Link as.
+
+# Curso   Module 1: Getting Started with Angular   Tutorial Lab: Bootstrapping Angular   To Set Up Your HTML for Angular and Declare Your App
+
+## To Set Up Your HTML for Angular and Declare Your App
+ Bookmark this page
+To Set Up Your HTML for Angular and Declare Your App
+
+In Angular, the word module refers to either an entire Angular application or independent components within that application. In the most simple terms, an Angular module is nothing more than a container for various parts of your app. In the following steps you will create an app module.
+
+Open Visual Studio Code.
+
+In Visual Studio Code, open the Mod1Lab folder that your created as part of the lab configuration process.
+
+Open helloworld.html, and then locate the <body> section of your file.
+
+Before the closing </body> tag, to add a reference to the Angular JavaScript library, enter the following code:
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+
+Directly below the code line that you just entered, to create a <script></script> tag that you will use to declare your Angular app, enter the following code:
+
+<script></script>
+
+Note: Remember that the term "module" and "app" in Angular are interchangeable. Angular modules are self-contained applications designed to either be standalone or components of other apps. You will be building up your Angular app and adding additional modules as you work your way through the labs in this course.
+
+Between the <script></script> tags that you just created, to declare your Angular app, enter the following code:
+
+var helloWorldApp = angular.module('helloWorldApp', []);
+
+Note: In the code line above, the empty array represented by [], is where you would define any other Angular modules that your app may depend on (for example, ng-animate, ng-touch).
+
+# Curso   Module 1: Getting Started with Angular   Tutorial Lab: Bootstrapping Angular   To Bootstrap Angular
+
+## To Bootstrap Angular
+ Bookmark this page
+To Bootstrap Angular
+
+The term "Bootstrap" is just a fancy way of saying "configure and start." In the previous section of this lab, you defined your helloWorldApp module. In the following steps you will bootstrap your app module by using the HTML attribute ng-app.
+
+Note: The 'ng-app' is an example of a custom attribute. Angular is taking advantage of the fact that the developer can add arbitrary attributes to HTML elements. In fact, the HTML 5 specification does define custom attributes that start with 'data-'  - see here for more details on those. Of course, based upon the specification, the Angular attributes starting with 'ng-' are actually invalid HTML. In order to support them, the Angular reads (or pre-processes) your HTML page and uses the 'ng-' attributes to guide it as it makes changes to the HTML, resulting in the output of valid HTML that displays data, respond to actions, etc.
+
+In Visual Studio Code, near the top of your helloworld.html file, locate the opening <html> tag.
+
+To bootstrap Angular by using the ng-app attribute, update the <html> tag to appear as follows:
+
+<html ng-app="helloWorldApp">
+Generally, if you are creating a Single Page App, you would apply the ng-app attribute on the <html> tag to bootstrap your application for the entire page. If you are working with multiple angular apps in the same page, or if you want to isolate the Angular application to only a portion of the page, you can use ng-app on a lower level element, such as a <div> tag.
+
+Locate the <body> section of your file, and then locate the <div> that contains the container class .
+
+Below the code line that defines an <h1> header, to display content on your page by using an Angular expression, enter the following code:
+
+<h2>{{'Hello from AngularJS'}}</h2>
+The {{}} in this HTML are used to indicate an Angular expression. You can use an Angular expression like this to reference values that are defined in the Scope function of the module (more on that later). In this case, the expression is simply telling Angular to print the hard coded string "Hello from AngularJS".
+
+Use File Explorer to open your Mod1Lab folder.
+
+Open your helloworld.html file in your browser. Your page should look similar to the following:
+
+AngularFundamentals - Hello from AngularJS
+Note: Notice that the {{}} structure is not being displayed. This is because Angular has evaluated the contents of the mustaches (in this case your hard coded "hello" message) and has rendered the view using the evaluated value as intended.
+
+At this point your helloworld.html file should look similar to the following:
+
+HTML code
+Note: If you need help please review Creating Angular Modules and Bootstrapping Your Angular Modules. in the Reference Content section of this module.
