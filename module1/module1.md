@@ -587,3 +587,198 @@ At this point your helloworld.html file should look similar to the following:
 
 HTML code
 Note: If you need help please review Creating Angular Modules and Bootstrapping Your Angular Modules. in the Reference Content section of this module.
+
+# Curso   Module 1: Getting Started with Angular   Tutorial Lab: Declaring Modules   To Declare a Controller
+
+## To Declare a Controller
+ Bookmark this page
+To Declare a Controller
+
+To add controllers or other components to an existing module, you reference the variable that you defined for the module. In the steps below you will add a controller to your helloWorldApp module. 
+
+If it isn't already open, use Visual Studio Code to open your Mod1Lab folder.
+
+Open your helloworld.html file, and then, in the <body></body> section, locate the <script></script> tag that is used to define your app module.
+
+Below the code line used to define your helloWorldApp module, to create a new controller module named firstController, enter the following code:
+
+helloWorldApp.controller('firstController', []);
+Note: There are two things that you should notice about this code:
+
+First, notice that we used the app name, helloWorldApp, at the front of our controller definition. This tells Angular to define your controller as part of the helloWorldApp module.
+
+Second, notice the array brackets [] at the end of the controller definition. The array brackets are used to hold the contents of the controller, which you will start defining in the next step. The array can also be used for injecting additional dependencies into the controller, which you will learn more about later in this module.
+
+To specify that your controller has a dependency on a $scope object, update the code for your controller as follows:
+
+    helloWorldApp.controller('firstController', [
+            '$scope',
+            function($scope){
+            }
+        ]);
+The '$scope' variable refers to the layer that binds the data from the controller into your view. For this reason, $scope is used by almost every controller.
+
+The last spot in the dependency definition is where you put a function with inputs matching every dependency you injected prior to it function($scope). This will be where you actually put the logic for your controller.
+
+Inside of the $scope function that you just added to your controller, to create a property of the $scope variable that can be used to display content on your Web page, update your $scope function as follows:
+
+    function($scope){
+        $scope.appName = 'An App Name';
+    }
+You create properties of the $scope variable to bind to your view. You can include other variables and program logic within your controller that you define normally, but they will not be accessible by the view if they are not defined within $scope.
+
+The code for your controller should now look like the following:
+
+helloWorldApp.controller('firstController', [
+    '$scope',
+    function($scope){
+        $scope.appName = 'An App Name';
+    }
+]);
+
+# Curso   Module 1: Getting Started with Angular   Tutorial Lab: Declaring Modules   To Bind the Controller to Your HTML
+
+## To Bind the Controller to Your HTML
+ Bookmark this page
+To Bind the Controller to Your HTML
+
+When Angular compiles the HTML, it processes the ng-controller directive, which in turn asks the injector to create an instance of the controller and its dependencies. In the following steps you will use ng-controller to bind your controller to your HTML.
+
+In your helloworld.html file, locate the opening <body> tag.
+
+To bind your controller to the <body> section of your Web page by using the ng-controller attribute, update your <body> tag as follows:
+
+    <body ng-controller="firstController">
+Applying the ng-controller attribute to an HTML tag tells Angular that the controller will work on that particular section of the view. Just like the ng-app declaration, ng-controller can be used on lower level elements as well. In this case, we have defined it on the <body> tag so the entire HTML body will be controlled by this controller. You will learn more about Controllers in a later module.
+
+Locate the <h2> tag that you created previously. This is where you are displaying the text content "Hello from AngularJS"
+
+Below the line containing the "hello" message, to reference the value of the scope variable you set in firstController, enter the following code:
+
+    <pre>{{appName}}</pre>
+At this point your helloworld.html file should look like this:
+
+alt text
+Browse to your page and you should see the following.
+
+alt text
+If you need help please review the Module Creation document.
+
+# Curso   Module 1: Getting Started with Angular   Tutorial Lab: Implementing Dependency Injection   To Declare a Constant
+
+## To Declare a Constant
+ Añadido a marcadores
+To Declare a Constant
+
+In the previous lab, you used ng-controller to bind your controller and its dependencies to your HTML. Your application code declared a dependency on $scope and Angular used an injector to take care of the rest. Angular will also invoke certain functions, such as services and factories, via the injector. In order to properly demonstrate the concept of Dependency Injection, we are going to create our own dependency, and then inject that into our controller. You will learn more about Dependency Injection in the following units. We will start things off by using the simplest thing you can inject into a controller, the Constant.
+
+A constant is used to hold static values. It is most useful in an application with multiple controllers, if you want to only define a property in one place. It can then be injected into any controller.
+
+In your helloworld.html file, locate the <script></script> tag that is used to define your app module.
+    <script></script>
+    
+        var helloWorldApp = angular.module('helloWorldApp', []);
+
+Below the code line defining helloWorldApp, to create a new constant for your app named myConfig, enter the following code:
+
+   helloWorldApp.constant('myConfig', {applicationName:'My Angular JS App'});
+A constant can either be a single value such as a string, or an object. It can't be a function, and shouldn't have any logic of its own, since it's a very isolated component. In this case we have chosen to use an object with a single property.
+
+Save your file.
+
+That's it! You've created your first component ready for injection into your controller.
+
+In the next unit, you will inject this value into your controller and use it in your app. 
+
+# Curso   Module 1: Getting Started with Angular   Tutorial Lab: Implementing Dependency Injection   To Inject a Dependency
+
+## To Inject a Dependency
+ Bookmark this page
+To Inject a Dependency
+
+At this point, we have created our own dependency - now it's time to use it. In order to do so, we need to tell the controller that this particular dependency is needed for the logic within the controller to function. By adding it to the list of dependencies, Angular will make it available to the controller automatically when the controller is invoked. This is what Dependency Injection is all about. 
+
+Note: For additional information on Dependency Injection, please see this Wikipedia Page. For a deep dive of Angular Dependency Injection, please see the Angular Documentation.
+
+If it isn't already open, use Visual Studio Code to open your Mod1Lab folder.
+
+Open your helloworld.html file, and then, in the <body> section, locate the code used to create your controller.
+
+Inside the array brackets [], before the function declaration, to declare a dependency on 'myConfig', update your controller as follows:
+
+helloWorldApp.controller('firstController', [
+    '$scope', 'myConfig',
+    function($scope, myConfig){
+        $scope.appName = 'An App Name';
+    }
+]);
+Just like when we declared $scope as a dependency into this controller, we have told Angular to load the myConfig constant that we created in the previous lab. 
+
+Note: Notice that the dependency myConfig has been included twice; once as a string literal and a second time as an object parameter. The string literal is included for minification purposes, and tells the minifier that the 'myConfig' object is being injected, but it can rename the myConfig variable to a shorter name.
+Change your $scope.appName variable to utilize the injected value.
+
+helloWorldApp.controller('firstController', [
+    '$scope', 'myConfig',
+    function($scope, myConfig){
+        $scope.appName = myConfig.applicationName;
+    }
+]);
+We have now replaced the $scope value we previously defined in our view with the value we defined in our injected constant. In this case, applicationName is the property of the constant we have created. If the constant were a single value instead of an object, you would simply use $scope.appName = myConfig
+Your completed helloworld.html file should look similar to the following:
+
+Part 3 helloworld.html
+Save your file, then Use File Explorer to open your Mod1Lab folder.
+
+Open your helloworld.html file in a browser. Your page should now look like the following:
+
+Part 3 Screenshot
+Congratulations! You have created and injected your own dependency into your app. You can use Dependency Injection to make single components for multiple controllers to use, while keeping your code clean and consistent.
+
+If you need help please review the Introduction to Dependency Injection document.
+
+# Curso   Module 1: Getting Started with Angular   Self-Assessment Lab: Angular Fundamentals   Lab Overview
+
+## Lab Overview
+ Bookmark this page
+Lab Overview
+
+In the previous labs, we walked you through building your first Angular application. For this self-assessment lab, you will build your own basic Angular JS application to display the current date on the screen.
+
+When you are finished, your completed lab assignment should look similar to the following screenshot:
+
+completed self-assessment lab
+
+# Curso   Module 1: Getting Started with Angular   Self-Assessment Lab: Angular Fundamentals   Lab Requirements
+
+## Lab Requirements
+ Bookmark this page
+Lab Requirements
+
+These are the requirements to complete the self-assessment lab. Use these requirements to guide the construction of your application. If you get stuck, refer back to the lab or course material to help you along. We have written the requirements as a user story. 
+
+Note: User stories are used in the Scrum software development methodology. Scrum is an iterative approach to software development. Read more about Scrum and User Stories.
+
+Task: Construct a basic Angular application to display the current date on the screen.
+
+User Story:
+
+As a user, I want a web page that will display the local date and time so that I can always be on time.
+
+Acceptance Criteria:
+
+Have an HTML file for the view (i.e. index.html)
+Load the Angular library in a script tag
+Declare an Angular module
+Declare an Angular Controller
+Use ng-controller to bind the Controller to the View
+Use an Angular Expression to bind the date value to the View
+Use the JavaScript Date Object to generate the date.
+Use Dependency Injection to get the date value from the constant.
+Note: In this module, you placed all your JavaScript in your HTML file between <script> tags. In future modules, you'll be creating external JavaScript files and injecting those. The principles are exactly the same but the JavaScript just lives in external files. If you would like to use external files for this Self-Assesment, feel free to give it a try. Instead of putting the JavaScript in your HTML, simply create an external file with a .js extension and copy and paste the JavaScript (everything between the <script> tags) into that file and use dependency injection to include it in your controller.
+
+TIPS:
+
+Be sure to put your declarations in order (Angular, then App declaration, then constant, then controller. This will ensure you have no errors.
+Since this is a fairly simple application, it would make things easier to keep everything in the same file. For more involved applications using external JavaScript files organized into sub-folders is useful.
+Remember - When you are done your application should look something like this:
+completed self-assessment lab assignment
