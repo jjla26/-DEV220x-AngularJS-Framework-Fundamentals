@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scope</title>
+</head>
+<body>
+    
+    <div ng-controller='myController'>
+<h1>{{title}}</h1>
+<a href='#' ng-click='renameTitle("Away")'>Click This to Change</a>
+</div>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script>
+    var app = angular.module("app", [])
+.controller("myController", [
+    "$scope",
+    function ($scope) {
+        $scope.title = "Home";
+        
+        $scope.renameTitle = function (newValue) {
+            $scope.title = newValue;
+        };
+    }
+]);    
+    </script>
+</body>
+</html>
